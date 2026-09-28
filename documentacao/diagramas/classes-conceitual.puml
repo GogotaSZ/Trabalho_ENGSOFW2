@@ -1,0 +1,84 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+
+class Motorista {
+  id
+  nome
+  telefone
+  documento
+  veiculo
+  rendimentoKmLitro
+}
+class GerenteCoordenador {
+  id
+  nome
+  telefone
+  email
+  equipeSobResponsabilidade
+}
+class Ponto {
+  id
+  endereco
+  latitude
+  longitude
+}
+class Roteiro {
+  id
+  data
+  distanciaTotal
+  /tempoTotalParado
+  /custoEstimado
+}
+class ParadaRoteiro {
+  id
+  ordem
+  enderecoRegistrado
+  chegadaEm
+  saidaEm
+  /tempoParado
+}
+class Parametro {
+  id
+  vigenciaInicio
+  valorCombustivel
+  rendimentoKmLitro
+  /custoPorKm
+  jornadaHoras
+  regraCalculoTempo
+}
+class RegistroAlteracao {
+  id
+  instante
+  tipo
+  valoresAnteriorNovo
+  responsavel
+}
+
+Motorista "1" -- "0..*" Roteiro : conduz
+Roteiro "1" *-- "1..*" ParadaRoteiro : contém
+Ponto "1" -- "0..*" ParadaRoteiro : identifica local
+Parametro "1" -- "0..*" Roteiro : aplicado em
+Ponto "0..1" -- "0..*" RegistroAlteracao : alterações do local
+ParadaRoteiro "0..1" -- "0..*" RegistroAlteracao : alterações de horários
+
+note right of ParadaRoteiro
+  Ordem começa em 1 e é única por roteiro.
+  Se ordem = 1, tempoParado não se aplica.
+  Nos demais: saída - chegada, quando completas.
+end note
+note bottom of RegistroAlteracao
+  Cada registro se refere a exatamente
+  um alvo: Ponto ou ParadaRoteiro.
+end note
+note bottom of Roteiro
+  Uma data e um motorista por roteiro.
+  Total = soma das paradas com ordem > 1.
+  Custo = distância * (preço / km por litro).
+end note
+note bottom of Parametro
+  jornadaHoras inicial = 8;
+  custoPorKm = valorCombustivel / rendimentoKmLitro.
+  RN01-RN03 permanecem invariantes.
+end note
+@enduml

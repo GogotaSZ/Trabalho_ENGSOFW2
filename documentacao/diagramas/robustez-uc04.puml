@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+class "Gestor ou Administrador" as A <<actor>>
+class "Formulário de Roteiro" as B <<boundary>>
+class "Montagem de Roteiro" as C <<control>>
+class "Motorista" as M <<entity>>
+class "Ponto" as P <<entity>>
+class "ParadaRoteiro" as PR <<entity>>
+class "Roteiro" as R <<entity>>
+class "Parametro" as PM <<entity>>
+A --> B : seleciona dados
+B --> C : solicita montagem
+C --> M : identifica responsável
+C --> P : valida pontos
+C --> PR : define sequência
+C --> PM : obtém valores
+C --> R : salva e estima custo
+C --> B : confirma
+@enduml

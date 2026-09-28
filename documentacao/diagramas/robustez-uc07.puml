@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+class "Gestor ou Administrador" as A <<actor>>
+class "Dashboard" as B <<boundary>>
+class "Agregação de Indicadores" as C <<control>>
+class "Roteiro" as R <<entity>>
+class "ParadaRoteiro" as PR <<entity>>
+class "Ponto" as P <<entity>>
+class "Parametro" as PM <<entity>>
+A --> B : seleciona recorte
+B --> C : solicita indicadores
+C --> R : consulta datas
+C --> PR : soma paradas válidas
+C --> P : associa endereços
+C --> PM : lê jornada aplicável
+C --> B : entrega séries/gráficos
+@enduml

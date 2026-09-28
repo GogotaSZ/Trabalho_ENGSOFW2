@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+class "Gestor ou Administrador" as A <<actor>>
+class "Tela de Histórico" as B <<boundary>>
+class "Consulta e Exportação" as C <<control>>
+class "Roteiro" as R <<entity>>
+class "ParadaRoteiro" as PR <<entity>>
+class "Ponto" as P <<entity>>
+A --> B : escolhe período/exportação
+B --> C : solicita dados
+C --> R : consulta por data
+C --> PR : consulta horários/tempos
+C --> P : identifica endereços
+C --> B : mostra resultado/relatório
+@enduml

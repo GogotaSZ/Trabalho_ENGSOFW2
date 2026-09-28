@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+class "Motorista ou Gestor" as A <<actor>>
+class "Tela de Coleta" as B <<boundary>>
+class "Registro de Horários" as C <<control>>
+class "ParadaRoteiro" as PR <<entity>>
+class "Roteiro" as R <<entity>>
+class "RegistroAlteracao" as AU <<entity>>
+A --> B : informa chegada/saída
+B --> C : envia horários
+C --> PR : verifica ordem e registra
+C --> R : recalcula total
+C --> AU : audita correção
+C --> B : mostra duração/pendência
+@enduml

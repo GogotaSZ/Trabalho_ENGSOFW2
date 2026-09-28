@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+actor "Motorista/Motoboy" as Motorista
+actor "Gerente/Coordenador" as Gestor
+actor "Administrador" as Admin
+
+rectangle "Sistema de Monitoramento de Tempo Parado" {
+  usecase "UC01\nCadastrar Motorista" as UC01
+  usecase "UC02\nCadastrar Gerente" as UC02
+  usecase "UC03\nCadastrar Ponto" as UC03
+  usecase "UC04\nMontar Roteiro Diário" as UC04
+  usecase "UC05\nRegistrar Chegada e Saída" as UC05
+  usecase "UC06\nConsultar Histórico" as UC06
+  usecase "UC07\nVisualizar Dashboard" as UC07
+  usecase "UC08\nParametrizar Custos" as UC08
+  usecase "UC09\nParametrizar Jornada e Regras" as UC09
+  usecase "UC10\nExportar Relatório" as UC10
+}
+Motorista -- UC05
+Gestor -- UC01
+Gestor -- UC03
+Gestor -- UC04
+Gestor -- UC05
+Gestor -- UC06
+Gestor -- UC07
+Gestor -- UC10
+Admin -- UC01
+Admin -- UC02
+Admin -- UC03
+Admin -- UC04
+Admin -- UC06
+Admin -- UC07
+Admin -- UC08
+Admin -- UC09
+Admin -- UC10
+UC10 ..> UC06 : <<extend>>
+@enduml

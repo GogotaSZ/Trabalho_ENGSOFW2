@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+class "Administrador" as A <<actor>>
+class "Formulário de Jornada" as B <<boundary>>
+class "Configuração de Jornada" as C <<control>>
+class "Parametro" as PM <<entity>>
+A --> B : informa jornada
+B --> C : solicita atualização
+C --> PM : consulta configuração
+C --> PM : registra versão válida
+C --> B : confirma/recusa alteração
+@enduml
