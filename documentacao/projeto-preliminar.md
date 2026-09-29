@@ -46,6 +46,39 @@ O limite do sistema abrange cadastro de profissionais, gestores, pontos e roteir
 
 **Ponto aberto — RF10.** “Parametrizar regras de cálculo” não especifica quais variações são permitidas. É possível manter parâmetros e valores da jornada editáveis, mas as RN01–RN03 continuam invariantes. O projeto não inventa limiares, arredondamentos ou formas alternativas de calcular duração. Uma alteração dessas regras exigiria especificação complementar.
 
+### 1.4 Tecnologias previstas
+
+Para uma futura implementação, propõe-se uma aplicação web dividida entre frontend e backend, mantidos no mesmo repositório. O frontend será responsável pela experiência do usuário, enquanto o backend concentrará autenticação, regras de negócio e acesso aos dados. Essa escolha atende ao requisito de interface web responsiva para uso em computadores e celulares.
+
+| Área | Tecnologia definida | Aplicação no projeto |
+|---|---|---|
+| Linguagem de programação | JavaScript | Linguagem utilizada no frontend React e no backend Node.js. |
+| Frontend | React 19.3 | Construção das telas, formulários, navegação e atualização dos dados sem recarregar toda a página. |
+| Ferramenta do frontend | Vite 8 | Criação, execução e preparação do frontend React para publicação. |
+| Ambiente do backend | Node.js 24 LTS | Execução do JavaScript no servidor em uma versão com suporte de longo prazo. |
+| Framework do backend | Express 5 | Implementação da API, das validações, das regras de negócio e do controle de acesso. |
+| Comunicação | API HTTP com JSON | Troca de informações entre o frontend React e o backend Express. |
+| Responsividade | Bootstrap 5.3 | Organização das telas para celular, tablet e computador, importante para o registro de horários pelo motorista. |
+| Banco de dados | PostgreSQL | Armazenamento de motoristas, pontos, roteiros, paradas, parâmetros e registros de alteração, com suporte a relacionamentos, restrições e transações. |
+| Acesso ao banco de dados | node-postgres (`pg`) | Conexão do Node.js ao PostgreSQL, com consultas SQL, transações e pool de conexões. |
+| Gráficos | Chart.js 4 | Apresentação dos tempos parados por dia, mês e período no dashboard. |
+| Autenticação e autorização | Sessões, cookies protegidos e middlewares de permissão | Separação dos acessos de administrador, gerente/coordenador e motorista/motoboy. |
+| Testes futuros | Vitest, React Testing Library e Supertest | Verificação das telas, regras de cálculo, permissões, consultas e rotas quando começar a implementação. |
+| Modelagem e documentação | PlantUML e Markdown | Manutenção dos diagramas e documentos do projeto em arquivos versionáveis. |
+| Controle de versão | Git e GitHub | Histórico das alterações e colaboração entre os integrantes da equipe. |
+
+**Justificativa da escolha.** React permite organizar a interface em componentes reutilizáveis e atualizar formulários, roteiros, históricos e gráficos de forma dinâmica. O Vite oferece o ambiente de desenvolvimento e a preparação do frontend. No servidor, Node.js e Express mantêm a aplicação na linguagem JavaScript e disponibilizam a API consumida pelo React. O acesso pelo `pg` mantém as consultas e transações próximas ao PostgreSQL, tecnologia com a qual a equipe já possui familiaridade. Bootstrap e Chart.js complementam a solução com responsividade e visualização dos indicadores.
+
+**Decisão sobre o banco de dados.** O PostgreSQL será utilizado como banco oficial tanto no desenvolvimento quanto na versão de demonstração do sistema. Não será adotado SQLite como banco alternativo, evitando diferenças de comportamento entre os ambientes e aproveitando a experiência prévia da equipe com PostgreSQL.
+
+**Decisão de arquitetura.** O React será responsável somente pela interface e não terá acesso direto ao PostgreSQL. Toda operação será enviada à API do Express, que verificará autenticação, permissões e regras de negócio antes de consultar ou alterar o banco. O frontend e o backend serão separados em módulos, mas permanecerão no mesmo repositório para facilitar o trabalho da equipe. Não será criado aplicativo nativo nesta etapa.
+
+**Organização prevista.** O frontend será dividido em páginas, componentes e serviços de comunicação com a API. O backend será dividido em rotas, controles, regras de negócio, autenticação e acesso ao banco. Essa separação mantém claras as responsabilidades de cada parte do sistema.
+
+**Limites da escolha.** Não se define neste momento serviço de mapas, hospedagem ou biblioteca de exportação, pois a origem da distância, o ambiente de publicação e o formato do relatório ainda precisam ser confirmados.
+
+**Referências técnicas:** [documentação do React](https://react.dev/), [React 19.3](https://react.dev/blog/2026/09/09/react-19-3), [documentação do Vite](https://vite.dev/), [versões LTS do Node.js](https://nodejs.org/en/about/previous-releases), [rotas e API com Express](https://expressjs.com/en/guide/routing/), [integração com PostgreSQL pelo `pg`](https://node-postgres.com/), [responsividade do Bootstrap](https://getbootstrap.com/docs/5.3/layout/breakpoints/), [recursos do PostgreSQL](https://www.postgresql.org/about/featurematrix/) e [gráficos responsivos com Chart.js](https://www.chartjs.org/docs/latest/configuration/responsive.html).
+
 ## 2. Versão consolidada para entrega
 
 ### 2.1 Atores e catálogo de casos de uso
