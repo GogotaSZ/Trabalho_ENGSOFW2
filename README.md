@@ -84,15 +84,6 @@ A estrutura relacional é adequada porque os dados possuem relacionamentos claro
 
 ---
 
-## Controle de versão
-
-Será utilizado:
-
-- **Git**
-- **GitHub**
-
----
-
 # Arquitetura
 
 O projeto utilizará uma arquitetura simples em camadas.
